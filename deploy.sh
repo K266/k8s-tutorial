@@ -13,6 +13,9 @@ docker push kitkatlite/multi-server:$SHA
 docker push kitkatlite/multi-worker:$SHA
 
 kubectl apply -f k8s
-kubectl rollout restart deployment/server-deployment
-kubectl rollout restart deployment/client-deployment
-kubectl rollout restart deployment/worker-deployment
+kubectl set image deployments/server-deployment server=kitkatlite/multi-server:$SHA
+kubectl set image deployments/client-deployment client=kitkatlite/multi-client:$SHA
+kubectl set image deployments/worker-deployment worker=kitkatlite/multi-worker:$SHA
+# kubectl rollout restart deployment/server-deployment
+# kubectl rollout restart deployment/client-deployment
+# kubectl rollout restart deployment/worker-deployment
